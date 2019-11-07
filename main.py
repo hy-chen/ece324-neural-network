@@ -9,7 +9,7 @@ import argparse
 import os
 
 
-from models import *
+# from models import *
 
 def main(args):
     ######
@@ -20,7 +20,7 @@ def main(args):
     ######
 
     # 3.2.1
-    TEXT = data.Field(sequential=True,lower=True, tokenize='spacy', include_lengths=True)
+    TEXT = data.Field(sequential=True, lower=True, tokenize='spacy', include_lengths=True)
     LABELS = data.Field(sequential=False, use_vocab=False)
 
     # 3.2.2
@@ -31,8 +31,8 @@ def main(args):
 
     # 3.2.3
     train_iter, val_iter, test_iter = data.BucketIterator.splits(
-      (train_data, val_data, test_data), batch_sizes=(args.batch_size, args.batch_size, args.batch_size),
-	sort_key=lambda x: len(x.text), device=None, sort_within_batch=True, repeat=False)
+        (train_data, val_data, test_data), batch_sizes=(args.batch_size, args.batch_size, args.batch_size),
+        sort_key=lambda x: len(x.text), device=None, sort_within_batch=True, repeat=False)
 
     # 3.2.4
     TEXT.build_vocab(train_data, val_data, test_data)
@@ -43,7 +43,14 @@ def main(args):
 
     print("Shape of Vocab:",TEXT.vocab.vectors.shape)
 
+    # 4.3
 
+    for i in range(args.epochs):
+        for j, samples in enumerate(train_iter,1):
+            print(samples)
+            batch_input, batch_input_length = samples.text
+            print(batch_input, batch_input_length)
+            #countinue here
 
     ######
 
@@ -54,14 +61,14 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--batch-size', type=int, default=64)
+    parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--lr', type=float, default=0.001)
     parser.add_argument('--epochs', type=int, default=25)
     parser.add_argument('--model', type=str, default='baseline',
                         help="Model type: baseline,rnn,cnn (Default: baseline)")
-    parser.add_argument('--emb-dim', type=int, default=100)
-    parser.add_argument('--rnn-hidden-dim', type=int, default=100)
-    parser.add_argument('--num-filt', type=int, default=50)
+    parser.add_argument('--emb_dim', type=int, default=100)
+    parser.add_argument('--rnn_hidden_dim', type=int, default=100)
+    parser.add_argument('--num_filt', type=int, default=50)
 
     args = parser.parse_args()
 

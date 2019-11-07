@@ -27,10 +27,10 @@ valid = pd.DataFrame(valid, columns=["text", "label"])
 test = pd.DataFrame(test, columns=["text", "label"])
 overfit = pd.DataFrame(overfit, columns=["text", "label"])
 
-train.to_csv("train.tsv", "\t", header=True)
-valid.to_csv("validation.tsv", "\t", header=True)
-test.to_csv("test.tsv", "\t", header=True)
-overfit.to_csv("overfit.tsv", "\t", header=True)
+train.to_csv("data/train.tsv", "\t", header=True, index=False)
+valid.to_csv("data/validation.tsv", "\t", header=True, index=False)
+test.to_csv("data/test.tsv", "\t", header=True, index=False)
+overfit.to_csv("data/overfit.tsv", "\t", header=True, index=False)
 
 for i in [train,valid,test,overfit]:
     print(i["label"].value_counts())

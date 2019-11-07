@@ -60,3 +60,8 @@ class RNN(nn.Module):
         # Section 6.0 YOUR CODE HERE
 
         ######
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
