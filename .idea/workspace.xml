@@ -5,6 +5,9 @@
       <change beforePath="$PROJECT_DIR$/../a4/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/../a4/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../a4/part4.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../a4/plot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/split_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/split_data.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../a4" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1T8jpz14O8kgiTtoq1wQJxRzY7S" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />

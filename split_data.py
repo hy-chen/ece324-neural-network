@@ -1,20 +1,5 @@
 """
     3.1 Create train/validation/test splits
- tab separated value, -> array.
- text(string), label(binary 0 or 1, string) 0 = objective.
- two labels - two sets.
- three sets: training 0.64, validation 0.16, test 0.20
- method: /2 -> /3 -> concat obj and sub samples.
- save into three tsv files.
- print out the number of o and s in each train,valid,test set.
-
- key dattatypes: labelssplit-> ndarray trainvalidtestsplit and savetotsv
-
- stratification by torchtext.data.Dataset (stratification = keep class ratio same as before splitting.
-
- a = np.array([0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1])
- np.bincount(a)
- Out: array([8, 4])
 
  overfit.tsv only 50 training samples with 25 o and 25 s.
 
@@ -26,35 +11,29 @@ import numpy as np
 import pandas as pd
 from torchtext import data
 import torchtext
+random_seed = 3
 
 data = pd.read_csv("data/data.tsv", delimiter="\t")
 
-print("shape:\n", data.shape)
-print("columns name:\n", data.columns)
-print("view of first 5 rows:\n", data.head())
-print(data["label"].value_counts())
-
-print(type(data))
 npdata = data.to_numpy()
-print(type(npdata))
-random_seed = 3
-A, test = train_test_split(npdata, test_size=0.2, random_state=random_seed, stratify=npdata[:,1])
-print(A.shape)
-print(test.shape)
-print(test)
-labels = A[:,1]
-print(labels)
-o = 0
-s = 0
-for i in labels:
-    if i == 1:
-        s+=1
-    else:
-        o+=1
 
-print(o,s)
+train_valid, test = train_test_split(npdata, test_size=0.2, random_state=random_seed, stratify=npdata[:,1])
+train, valid = train_test_split(train_valid, test_size=0.2, random_state=random_seed, stratify=train_valid[:,1])
+_, overfit = train_test_split(npdata, test_size=50/10000, random_state=random_seed, stratify=npdata[:,1])
 
 
+train = pd.DataFrame(train, columns=["text", "label"])
+valid = pd.DataFrame(valid, columns=["text", "label"])
+test = pd.DataFrame(test, columns=["text", "label"])
+overfit = pd.DataFrame(overfit, columns=["text", "label"])
+
+train.to_csv("train.tsv", "\t", header=True)
+valid.to_csv("validation.tsv", "\t", header=True)
+test.to_csv("test.tsv", "\t", header=True)
+overfit.to_csv("overfit.tsv", "\t", header=True)
+
+for i in [train,valid,test,overfit]:
+    print(i["label"].value_counts())
 
 
 
